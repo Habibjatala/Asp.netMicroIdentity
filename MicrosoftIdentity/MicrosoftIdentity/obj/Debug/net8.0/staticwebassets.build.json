@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "KenVgxF5s0hrOcE0N5PuEcbKQ+ZV0/iHsQ7jSFxYNFE=",
+  "Source": "MicrosoftIdentity",
+  "BasePath": "_content/MicrosoftIdentity",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
