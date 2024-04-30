@@ -144,3 +144,4 @@ C:\Users\Lenovo\Downloads\DotNet\MicrosoftIdentity\MicrosoftIdentity\obj\Debug\n
 C:\Users\Lenovo\Downloads\DotNet\MicrosoftIdentity\MicrosoftIdentity\obj\Debug\net8.0\MicrosoftIdentity.pdb
 C:\Users\Lenovo\Downloads\DotNet\MicrosoftIdentity\MicrosoftIdentity\obj\Debug\net8.0\MicrosoftIdentity.genruntimeconfig.cache
 C:\Users\Lenovo\Downloads\DotNet\MicrosoftIdentity\MicrosoftIdentity\obj\Debug\net8.0\ref\MicrosoftIdentity.dll
+C:\Users\Lenovo\Downloads\DotNet\MicrosoftIdentity\MicrosoftIdentity\obj\Debug\net8.0\MicrosoftIdentity.sourcelink.json

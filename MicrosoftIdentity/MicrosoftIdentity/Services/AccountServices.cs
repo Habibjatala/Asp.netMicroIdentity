@@ -41,23 +41,36 @@ namespace MicrosoftIdentity.Services
             var createUser = await _userManager.CreateAsync(newUser!, userDTO.Password);
             if (!createUser.Succeeded) return new GeneralResponse(false, "Error occured.. please try again");
 
-            //Assign Default Role : Admin to first registrar; rest is user
-            var checkAdmin = await _roleManager.FindByNameAsync("Admin");
-            if (checkAdmin is null)
+
+            if (await _roleManager.RoleExistsAsync(userDTO.Role))
             {
-                await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
-                await _userManager.AddToRoleAsync(newUser, "Admin");
-                return new GeneralResponse(true, "Account Created");
+                // Assign the specified role to the user
+                await _userManager.AddToRoleAsync(newUser, userDTO.Role);
             }
             else
             {
-                var checkUser = await _roleManager.FindByNameAsync("User");
-                if (checkUser is null)
-                    await _roleManager.CreateAsync(new IdentityRole() { Name = "User" });
-
-                await _userManager.AddToRoleAsync(newUser, "User");
-                return new GeneralResponse(true, "Account Created");
+                // If the specified role doesn't exist, create it and assign it to the user
+                await _roleManager.CreateAsync(new IdentityRole() { Name = userDTO.Role });
+                await _userManager.AddToRoleAsync(newUser, userDTO.Role);
             }
+            return new GeneralResponse(true, "Account Created");
+            //Assign Default Role : Admin to first registrar; rest is user
+            //var checkAdmin = await _roleManager.FindByNameAsync("Admin");
+            //if (checkAdmin is null)
+            //{
+            //    await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
+            //    await _userManager.AddToRoleAsync(newUser, "Admin");
+            //    return new GeneralResponse(true, "Account Created");
+            //}
+            //else
+            //{
+            //    var checkUser = await _roleManager.FindByNameAsync("User");
+            //    if (checkUser is null)
+            //        await _roleManager.CreateAsync(new IdentityRole() { Name = "User" });
+
+            //    await _userManager.AddToRoleAsync(newUser, "User");
+            //    return new GeneralResponse(true, "Account Created");
+            //}
         }
 
         public async Task<LoginResponse> LoginAccount(LoginDto loginDTO)

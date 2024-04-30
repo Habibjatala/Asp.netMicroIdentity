@@ -4,7 +4,13 @@
     {
         public class ApplicationUser :IdentityUser
         {
-            public string Name { get; set; }
-            public string  Address { get; set; }
+        public ApplicationUser()
+        {
+            PersonalInfos = new List<PersonalInfo>();
         }
+        public string Name { get; set; }
+            public string  Address { get; set; }
+
+         public virtual ICollection<PersonalInfo> PersonalInfos { get; set; }
+    }
     }

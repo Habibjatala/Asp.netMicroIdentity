@@ -23,5 +23,6 @@ namespace MicrosoftIdentity.Dtos
         public string ConfirmPassword { get; set; } = string.Empty;
         [Required]
         public string Address { get; set; } = string.Empty;
+        public string Role { get; set; } = "User";
     }
 }

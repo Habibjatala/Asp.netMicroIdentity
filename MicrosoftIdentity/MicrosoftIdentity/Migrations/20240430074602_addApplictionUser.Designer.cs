@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MicrosoftIdentity.DataContext;
 
@@ -11,9 +12,11 @@ using MicrosoftIdentity.DataContext;
 namespace MicrosoftIdentity.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240430074602_addApplictionUser")]
+    partial class addApplictionUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,8 +161,7 @@ namespace MicrosoftIdentity.Migrations
             modelBuilder.Entity("MicrosoftIdentity.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("UserId");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -226,7 +228,7 @@ namespace MicrosoftIdentity.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("MicrosoftIdentity.Models.PersonalInfo", b =>
@@ -283,7 +285,8 @@ namespace MicrosoftIdentity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("PersonalInfos");
                 });
@@ -342,8 +345,8 @@ namespace MicrosoftIdentity.Migrations
             modelBuilder.Entity("MicrosoftIdentity.Models.PersonalInfo", b =>
                 {
                     b.HasOne("MicrosoftIdentity.Models.ApplicationUser", "User")
-                        .WithMany("PersonalInfos")
-                        .HasForeignKey("UserId")
+                        .WithOne("PersonalInfo")
+                        .HasForeignKey("MicrosoftIdentity.Models.PersonalInfo", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -352,7 +355,8 @@ namespace MicrosoftIdentity.Migrations
 
             modelBuilder.Entity("MicrosoftIdentity.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("PersonalInfos");
+                    b.Navigation("PersonalInfo")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

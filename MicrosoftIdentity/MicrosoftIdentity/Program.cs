@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using MicrosoftIdentity.DataContext;
 using MicrosoftIdentity.Models;
 using MicrosoftIdentity.Services;
+using MicrosoftIdentity.Services.PersonalInfoService;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Text;
@@ -75,6 +76,7 @@ builder.Services.AddAuthentication(k =>
 
 
 builder.Services.AddScoped<IAccountServices, AccountServices>();
+builder.Services.AddScoped<IPersonalServices, PersonalServices>();
 
 var app = builder.Build();
 
